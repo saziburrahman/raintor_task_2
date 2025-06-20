@@ -3,7 +3,7 @@ import "leaflet/dist/leaflet.css";
 import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import { useSignalR } from "../hooks/useSignalR";
 
-const defaultPosition = [25.7373, 90.3644];
+const defaultPosition: L.LatLngTuple | L.LatLngExpression = [25.7373, 90.3644];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -34,7 +34,7 @@ export function LocationReceiver() {
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
         {locations.map(({ userName, lat, lon }) => (
-          <Marker key={userName} position={[lat, lon]}>
+          <Marker key={userName} position={[lat, lon] as [number, number]}>
             <Popup>
               {userName} <br /> {lat.toFixed(6)}, {lon.toFixed(6)}
             </Popup>
